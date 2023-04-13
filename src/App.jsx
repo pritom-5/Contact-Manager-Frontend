@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import ErrorModal from "./components/UI/ErrorModal";
 import DisplayCtx from "./context/DisplayCtx";
 import AddContact from "./pages/AddContact";
+import Nav from "./components/nav/Nav";
 
 function App() {
   const { isLoggedIn } = useContext(AuthCtx);
@@ -21,6 +22,7 @@ function App() {
       {/* error modal */}
       {showErrorModal.show && <ErrorModal />}
       <div className="main_section">
+        <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route

@@ -9,7 +9,8 @@ const initialContext = {
 const AuthCtx = createContext(initialContext);
 
 export function AuthCtxProvider(props) {
-  const [isLoggedInState, setIsLoggedInState] = useState(false);
+  // ERROR: change login state false
+  const [isLoggedInState, setIsLoggedInState] = useState(true);
   const [userInfoState, setUserInfoState] = useState({});
 
   // on first mount check if user isloggedIn
@@ -21,7 +22,6 @@ export function AuthCtxProvider(props) {
   // check for user details only when isLoggedInState changes
   // if isLoggedIn -> true -> get get userDetails
   useEffect(() => {
-    // ---------------------
     // if user is not logged in return from here.
     if (!isLoggedInState) return;
 
@@ -47,12 +47,11 @@ export function AuthCtxProvider(props) {
       if (!data || data.message === "unauthorized") return;
 
       const { username, email, message, status } = data;
+
       setUserInfoState({ username, email });
-      // console.log("userDetails", data, "token", token);
     };
 
     fetchUserInfoFn();
-    // ---------------------
   }, [isLoggedInState]);
 
   const isLoggedInHandlerFn = (bool) => {

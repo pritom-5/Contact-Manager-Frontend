@@ -1,5 +1,4 @@
 import { useContext, useRef } from "react";
-import AuthCtx from "../../context/AuthCtx";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
 
@@ -11,12 +10,12 @@ export default function RegisterForm() {
   const textRef = useRef();
   const passRef = useRef();
   const mailRef = useRef();
-
   const formRef = useRef();
 
+  // form submit
   const submitHandler = async (e) => {
     e.preventDefault();
-    // get values from from ref
+
     const username = textRef.current.value;
     const password = passRef.current.value;
     const email = mailRef.current.value;
@@ -70,49 +69,56 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="login_form_section">
-      <div className="title">Register</div>
-      <div className="form">
-        <form onSubmit={submitHandler} ref={formRef}>
-          <div className="username">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              min={3}
-              max={15}
-              required
-              ref={textRef}
-            />
-          </div>
-          <div className="password">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              min={3}
-              max={15}
-              required
-              ref={passRef}
-            />
-          </div>
-          <div className="email">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              min={3}
-              max={15}
-              required
-              ref={mailRef}
-            />
-          </div>
-          <input type="submit" value="Register" />
-        </form>
-      </div>
+    <div className="form_container">
+      <div className="form_title">Register</div>
+      <form onSubmit={submitHandler} ref={formRef} className="form_section">
+        <div className="username input_section ">
+          <label className="input_label" htmlFor="username">
+            Username
+          </label>
+          <input
+            className="input_field"
+            type="text"
+            name="username"
+            id="username"
+            min={3}
+            max={15}
+            required
+            ref={textRef}
+          />
+        </div>
+        <div className="password input_section">
+          <label className="input_label" htmlFor="password">
+            Password
+          </label>
+          <input
+            className="input_field"
+            type="password"
+            name="password"
+            id="password"
+            min={3}
+            max={15}
+            required
+            ref={passRef}
+          />
+        </div>
+        <div className="email input_section">
+          <label className="input_label" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="input_field"
+            type="email"
+            name="email"
+            id="email"
+            min={3}
+            max={15}
+            required
+            ref={mailRef}
+          />
+        </div>
+        <input type="submit" value="Register" className="submit_button" />
+      </form>
     </div>
   );
 }

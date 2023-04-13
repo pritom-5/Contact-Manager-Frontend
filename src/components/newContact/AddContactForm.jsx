@@ -82,49 +82,60 @@ export default function AddContactForm() {
   };
 
   return (
-    <div className="login_form_section">
-      <div className="title">Add New Contact</div>
-      <div className="form">
-        <form onSubmit={submitHandler} ref={formRef}>
-          <div className="name">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              min={3}
-              max={15}
-              required
-              ref={nameRef}
-            />
-          </div>
-          <div className="phone">
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="text"
-              name="phone"
-              id="phone"
-              min={3}
-              max={15}
-              required
-              ref={phoneRef}
-            />
-          </div>
-          <div className="mail">
-            <label htmlFor="mail">E-mail</label>
-            <input
-              type="email"
-              name="mail"
-              id="mail"
-              min={3}
-              max={15}
-              required
-              ref={mailRef}
-            />
-          </div>
-          <input type="submit" value="Add New Contact" />
-        </form>
-      </div>
+    <div className="form_container">
+      <div className="form_title">Add New Contact</div>
+      <form onSubmit={submitHandler} ref={formRef} className="form_section">
+        <div className="name input_section">
+          <label className="input_label" htmlFor="name">
+            Name
+          </label>
+          <input
+            className="input_field"
+            type="text"
+            name="name"
+            id="name"
+            min={3}
+            max={15}
+            required
+            ref={nameRef}
+          />
+        </div>
+        <div className="phone input_section">
+          <label className="input_label" htmlFor="phone">
+            Phone
+          </label>
+          <input
+            className="input_field"
+            type="text"
+            name="phone"
+            id="phone"
+            min={3}
+            max={15}
+            required
+            ref={phoneRef}
+          />
+        </div>
+        <div className="mail input_section">
+          <label className="input_label" htmlFor="mail">
+            E-mail
+          </label>
+          <input
+            className="input_field"
+            type="email"
+            name="mail"
+            id="mail"
+            min={3}
+            max={15}
+            required
+            ref={mailRef}
+          />
+        </div>
+        <input
+          type="submit"
+          value="Add New Contact"
+          className="submit_button"
+        />
+      </form>
     </div>
   );
 }

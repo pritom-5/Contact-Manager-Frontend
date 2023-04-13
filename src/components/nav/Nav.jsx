@@ -1,20 +1,31 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthCtx from "../../context/AuthCtx";
+import css from "./Nav.module.css";
 
 export default function Nav() {
+  const { isLoggedIn } = useContext(AuthCtx);
   return (
-    <div className="nav_section">
+    <div className={css.nav_section}>
       {/* home contacts usericon */}
-      <ul>
-        <li>
-          <Link to={"/"}>Home</Link>
-        </li>
+      <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      {isLoggedIn && (
         <li>
           <Link to={"/addNewContact"}>Add New Contact</Link>
         </li>
+      )}
+      {isLoggedIn && (
+        <li>
+          <Link to={"/contacts"}>Contacts</Link>
+        </li>
+      )}
+      {isLoggedIn && (
         <li>
           <Link to={"/userInfo"}>User Info</Link>
         </li>
-      </ul>
+      )}
     </div>
   );
 }

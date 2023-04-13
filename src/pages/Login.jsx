@@ -1,10 +1,10 @@
+import { Fragment } from "react";
 import LoginForm from "../components/LoginForm/LoginForm";
 
 export default function Login() {
   return (
-    <div className="login_section">
-      login section goes here
+    <Fragment>
       <LoginForm />
-    </div>
+    </Fragment>
   );
 }

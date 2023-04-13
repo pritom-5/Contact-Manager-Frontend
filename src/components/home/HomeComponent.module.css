@@ -1,0 +1,29 @@
+.home_component_section {
+  max-width: 70%;
+  margin-inline: auto;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.title_section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.buttons_section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.title {
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+}
+.description {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

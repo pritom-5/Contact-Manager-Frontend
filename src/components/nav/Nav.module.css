@@ -1,0 +1,18 @@
+.nav_section {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* left: 58px; */
+  padding-block: 1rem;
+  background-color: white;
+  color: black;
+  border-top: 2px solid black;
+}
+.nav_section > * {
+  width: max-content;
+  color: inherit;
+}
