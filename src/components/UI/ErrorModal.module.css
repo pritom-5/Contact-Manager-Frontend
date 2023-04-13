@@ -1,0 +1,18 @@
+.error_modal_section {
+  background-color: var(--bg);
+  color: white;
+  padding: 1rem 1rem;
+  border-radius: var(--border-radius-0);
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50vw;
+  transform: translateX(-50%);
+}
+.red {
+  --bg: var(--red);
+}
+
+.green {
+  --bg: var(--lime);
+}

@@ -1,0 +1,26 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-image: url("./assets/bg-img-01.webp");
+  z-index: 0;
+}
+
+.main_section {
+  max-width: 70vw;
+  width: 70vw;
+  height: 120vh;
+  max-height: 90vh;
+  overflow-y: scroll;
+  position: absolute;
+  left: 50vw;
+  transform: translateX(-50%);
+  top: 5vh;
+  z-index: 1;
+  background-color: white;
+  color: black;
+  border-radius: var(--border-radius-1);
+}
