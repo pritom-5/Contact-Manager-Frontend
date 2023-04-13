@@ -9,6 +9,9 @@ export default function Nav() {
           <Link to={"/"}>Home</Link>
         </li>
         <li>
+          <Link to={"/addNewContact"}>Add New Contact</Link>
+        </li>
+        <li>
           <Link to={"/userInfo"}>User Info</Link>
         </li>
       </ul>

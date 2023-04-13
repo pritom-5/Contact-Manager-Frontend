@@ -10,6 +10,7 @@ import UserInfo from "./pages/UserInfo";
 import Contact from "./pages/Contact";
 import ErrorModal from "./components/UI/ErrorModal";
 import DisplayCtx from "./context/DisplayCtx";
+import AddContact from "./pages/AddContact";
 
 function App() {
   const { isLoggedIn } = useContext(AuthCtx);
@@ -37,6 +38,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/addNewContact" element={<AddContact />} />
         </Routes>
       </div>
     </div>

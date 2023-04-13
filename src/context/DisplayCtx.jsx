@@ -18,9 +18,6 @@ export function DisplayCtxProvider(props) {
   // timeout tracker state
   const [timeoutState, setTimeoutState] = useState();
 
-  // clear previous timeout as state changes
-  useEffect(() => console.log("clear timeout"), [timeoutState]);
-
   const showErrorModalHandler = (errorInfo) => {
     const { show, type, message } = errorInfo;
     setShowErrorModal({ show: true, type, message });
@@ -28,6 +25,7 @@ export function DisplayCtxProvider(props) {
     // timeout retirns id which is stored in timeoutState
     const timeout = setTimeout(() => {
       setShowErrorModal({ show: false, type: "error", message: "" });
+      clearTimeout(timeoutState);
     }, 5000);
 
     setTimeoutState(timeout);

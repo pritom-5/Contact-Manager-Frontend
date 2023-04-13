@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import data from "../../dataTest/contactsTest.json";
-
+import contactsTest from "../../dataTest/contactsTest.json";
 export default function ContactsComponent() {
-  const [contacts, setContacts] = useState([]);
-
-  console.log(data);
+  const [contacts, setContacts] = useState(contactsTest);
 
   //   useEffect(() => {
   //     const fetchFn = async () => {

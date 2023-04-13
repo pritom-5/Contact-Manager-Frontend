@@ -6,6 +6,7 @@ import DisplayCtx from "../../context/DisplayCtx";
 export default function ErrorModal() {
   const { showErrorModal } = useContext(DisplayCtx);
   const { message, type } = showErrorModal;
+
   return (
     <div
       id="error_modal_section"
