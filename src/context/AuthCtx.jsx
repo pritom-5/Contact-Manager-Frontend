@@ -10,7 +10,7 @@ const AuthCtx = createContext(initialContext);
 
 export function AuthCtxProvider(props) {
   // ERROR: change login state false
-  const [isLoggedInState, setIsLoggedInState] = useState(true);
+  const [isLoggedInState, setIsLoggedInState] = useState(false);
   const [userInfoState, setUserInfoState] = useState({});
 
   // on first mount check if user isloggedIn

@@ -9,8 +9,8 @@ export default function UserInfoComponent() {
   const { email, username } = userInfo;
   const navigate = useNavigate();
 
+  // on logout button click
   const logoutHandler = () => {
-    // clear token and isLoggedIn from local storage
     localStorage.removeItem("token");
     localStorage.removeItem("isLoggedIn");
 
