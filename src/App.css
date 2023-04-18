@@ -1,12 +1,12 @@
 .App {
   width: 100vw;
   height: 100vh;
-  display: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   background-image: url("./assets/bg-img-01.webp");
-  z-index: 0;
+  overflow-y: hidden;
 }
 
 .main_section {
@@ -14,14 +14,13 @@
   width: 70vw;
   height: 120vh;
   max-height: 90vh;
-  overflow-y: scroll;
   position: absolute;
   left: 50vw;
   transform: translateX(-50%);
   top: 5vh;
   z-index: 1;
-  background-color: white;
-  color: black;
+  background-color: var(--black-700);
+  color: white;
   border-radius: var(--border-radius-1);
 }
 
@@ -74,6 +73,7 @@
   width: inherit;
   outline: none;
   background-color: black;
+  color: var(--accent-lime);
   padding: 0.75rem 1rem;
   border-radius: var(--border-radius-0);
   font-size: inherit;
@@ -83,6 +83,7 @@
 }
 .submit_button:active,
 .submit_button:hover {
-  background-color: transparent;
-  color: black;
+  background-color: var(--accent-lime);
+  color: var(--black-700);
+  border-color: var(--accent-lime);
 }

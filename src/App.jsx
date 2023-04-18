@@ -12,6 +12,7 @@ import ErrorModal from "./components/UI/ErrorModal";
 import DisplayCtx from "./context/DisplayCtx";
 import AddContact from "./pages/AddContact";
 import Nav from "./components/nav/Nav";
+import ContactDetails from "./components/contactDetails/ContactDetals";
 
 function App() {
   const { isLoggedIn } = useContext(AuthCtx);
@@ -28,11 +29,13 @@ function App() {
           <Route
             path="/contacts"
             element={isLoggedIn ? <Contacts /> : <Home />}
-          />
-          <Route
-            path="/contact/:contactId"
-            element={isLoggedIn ? <Contact /> : <Home />}
-          />
+          >
+            <Route
+              path=":contactId"
+              element={isLoggedIn ? <ContactDetails /> : <Home />}
+            />
+          </Route>
+
           <Route
             path="/userInfo"
             element={isLoggedIn ? <UserInfo /> : <Home />}

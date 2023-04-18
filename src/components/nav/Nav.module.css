@@ -1,18 +1,23 @@
 .nav_section {
   display: flex;
   justify-content: center;
-  gap: 4rem;
   position: fixed;
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
   /* left: 58px; */
-  padding-block: 1rem;
-  background-color: white;
-  color: black;
-  border-top: 2px solid black;
+  border-radius: var(--border-radius-0);
+  background-color: rgb(20, 20, 20, 0.6);
+  color: var(--accent-lime);
 }
 .nav_section > * {
   width: max-content;
   color: inherit;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  transition: background-color 0.15s ease-in;
+}
+.nav_section > *:hover {
+  background-color: var(--accent-lime);
+  color: var(--black-700);
 }

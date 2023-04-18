@@ -1,15 +1,15 @@
+import ContactDetails from "../components/contactDetails/ContactDetals";
 import ContactsComponent from "../components/contacts/ContactsComponent";
 import Nav from "../components/nav/Nav";
 
 export default function Contacts() {
   return (
-    <div className="contacts_section">
-      Contacts
-      {/* nav goes here */}
+    <div className="contacts_container">
       <Nav />
-      {/* show contacts if logged in */}
-      {/* show login button if not logged in */}
-      <ContactsComponent />
+      <div id="contacts_and_details_section" style={{ display: "flex" }}>
+        <ContactsComponent />
+        <ContactDetails />
+      </div>
     </div>
   );
 }

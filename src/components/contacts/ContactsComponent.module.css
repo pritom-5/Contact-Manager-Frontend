@@ -1,0 +1,19 @@
+.contacts_section {
+  width: 40%;
+  padding: 1rem 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contacts_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: scroll;
+  height: 75vh;
+  padding-bottom: 0.5rem;
+}
+
+.contact_header {
+  margin-left: 2rem;
+}

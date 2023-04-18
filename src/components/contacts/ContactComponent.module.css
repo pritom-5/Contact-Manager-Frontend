@@ -1,0 +1,21 @@
+.active {
+  --bg: #b9e041;
+  --color: black;
+}
+.contact_section {
+  background-color: var(--bg, #19191a);
+  color: var(--color);
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  padding-block: 1rem;
+  padding-left: 2rem;
+}
+.logo {
+  width: 32px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

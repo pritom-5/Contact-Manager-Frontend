@@ -8,9 +8,11 @@ export default function Nav() {
   return (
     <div className={css.nav_section}>
       {/* home contacts usericon */}
-      <li>
-        <Link to={"/"}>Home</Link>
-      </li>
+      {!isLoggedIn && (
+        <li>
+          <Link to={"/"}>Home</Link>
+        </li>
+      )}
       {isLoggedIn && (
         <li>
           <Link to={"/addNewContact"}>Add New Contact</Link>

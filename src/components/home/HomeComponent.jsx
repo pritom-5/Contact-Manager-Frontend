@@ -20,9 +20,7 @@ export default function HomeComponent() {
           <p>
             Additionally, the contact manager app is built to be scalable,
             meaning that it can handle the storage and management of a large
-            number of contacts with ease. This scalability feature ensures that
-            the app can grow alongside the user's needs, making it a valuable
-            tool for both individuals and businesses alike.
+            number of contacts with ease.
           </p>
         </div>
       </div>

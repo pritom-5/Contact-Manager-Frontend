@@ -1,34 +1,19 @@
-import { useEffect, useState } from "react";
-import contactsTest from "../../dataTest/contactsTest.json";
+import { useContext, useEffect, useState } from "react";
+import ContactComponent from "./ContactComponent";
+import ContactCtx from "../../context/ContactCtx";
+import css from "./ContactsComponent.module.css";
 export default function ContactsComponent() {
-  const [contacts, setContacts] = useState(contactsTest);
+  const { contacts } = useContext(ContactCtx);
 
-  //   useEffect(() => {
-  //     const fetchFn = async () => {
-  //       // get token from localStorage
-  //       const token = localStorage.getItem("token");
-  //       const responseObj = {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //         credentials: "include",
-  //       };
-  //       const response = await fetch(
-  //         "http://localhost:5000/api/contacts",
-  //         responseObj
-  //       );
-  //       const data = await response.json();
-
-  //       // TODO:
-  //       //   if data.status !== 200 ; redirect to home page
-  //       // show error message
-
-  //       console.log(data);
-  //     };
-  //     fetchFn();
-  //   }, []);
-
-  return <div id="contacts_comp_section">contacts comp</div>;
+  return (
+    <div id="contacts_comp_section" className={css.contacts_section}>
+      <div className={`${css.contact_header} form_title`}>Contacts List</div>
+      <div className={css.contacts_list}>
+        {contacts.map((item) => {
+          const { _id: id } = item;
+          return <ContactComponent key={id} contactInfo={item} />;
+        })}
+      </div>
+    </div>
+  );
 }
