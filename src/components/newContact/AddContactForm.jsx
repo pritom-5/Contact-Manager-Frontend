@@ -2,6 +2,9 @@ import { useContext, useRef } from "react";
 import AuthCtx from "../../context/AuthCtx";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
+import postDataToDb from "../../util/postDataToDb";
+import { POST_NEW_CONTACT } from "../../constants/constants";
+import getTokenFromLocalStorage from "../../util/getTokenFromLocalStorage";
 
 // TODO: print some info bottom of the login form
 // proper error hander with message.
@@ -21,7 +24,7 @@ export default function AddContactForm() {
     e.preventDefault();
 
     // get token from local storage
-    const token = localStorage.getItem("token");
+    const token = getTokenFromLocalStorage("token");
 
     // get values from from ref
     const name = nameRef.current.value;
@@ -40,32 +43,23 @@ export default function AddContactForm() {
 
     const input = { name, phone, email };
 
-    const postOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      credentials: "include",
-      body: JSON.stringify(input),
-    };
-
-    const response = await fetch(
-      "http://localhost:5000/api/contacts",
-      postOptions
+    const dataReturnedFromDb = await postDataToDb(
+      POST_NEW_CONTACT,
+      input,
+      token
     );
-
-    const data = await response.json();
+    const { message, status } = dataReturnedFromDb;
+    console.log(dataReturnedFromDb);
 
     // reset from after submit
     formRef.current.reset();
 
     // check if contact response is valid
-    if (data.status !== 200) {
+    if (status !== 200) {
       showErrorModalHandler({
         show: true,
         type: "error",
-        message: data.message,
+        message: message,
       });
       return;
     }
@@ -74,7 +68,7 @@ export default function AddContactForm() {
     showErrorModalHandler({
       show: true,
       type: "success",
-      message: data.message,
+      message: message,
     });
 
     // navigate to contacts page

@@ -1,9 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import testContacts from "../dataTest/contactsTest.json";
 import useSelectActiveContact from "../hooks/useSelectActiveContact";
 import useDataFetchEffectHook from "../hooks/useDataFetchEffectHook";
 import { GET_ALL_CONTACTS } from "../constants/constants";
 import getTokenFromLocalStorage from "../util/getTokenFromLocalStorage";
+import AuthCtx from "./AuthCtx";
 
 const defaultContactContext = {
   contacts: [],
@@ -15,16 +16,14 @@ const defaultContactContext = {
 const ContactCtx = createContext(defaultContactContext);
 
 export function ContactCtxProvider({ children }) {
+  const { isLoggedIn } = useContext(AuthCtx);
+
   const token = getTokenFromLocalStorage("token");
   const { fetchedData: allContactsList } = useDataFetchEffectHook(
+    isLoggedIn,
     GET_ALL_CONTACTS,
     token
   );
-  // const [allContactsListState, setAllContactsListState] = useState(fetchedData); // TODO: make custom hook and fetch contacts from there
-
-  // ERROR: to many re renders limits exceeded
-  // when setAllContactsListState(fetchData)
-  // console.log(fetchedData);
 
   const {
     activeConactState,

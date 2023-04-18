@@ -14,6 +14,9 @@ export default function ContactDetails() {
     letter,
   } = activeContactDetailsState;
 
+  /////
+  console.log(contactName, id, phone, email);
+
   return (
     <div id="contact_details_section" className={`${css.details_section}`}>
       <div className="title_section form_title">Details</div>
@@ -24,25 +27,29 @@ export default function ContactDetails() {
       >
         <div id="name">{contactName}</div>
       </div>
-      <div id="info_section" className={css.info_section}>
-        <div id="email" className={css.field}>
-          <div id="title" className={css.fieldtitle}>
-            Email
+      {!!id ? (
+        <div id="info_section" className={css.info_section}>
+          <div id="email" className={css.field}>
+            <div id="title" className={css.fieldtitle}>
+              Email
+            </div>
+            <div id="value" className={css.fieldvalue}>
+              {email}
+            </div>
           </div>
-          <div id="value" className={css.fieldvalue}>
-            {email}
-          </div>
-        </div>
 
-        <div id="phone" className={css.field}>
-          <div id="title" className={css.fieldtitle}>
-            Phone
-          </div>
-          <div id="value" className={css.fieldvalue}>
-            {phone}
+          <div id="phone" className={css.field}>
+            <div id="title" className={css.fieldtitle}>
+              Phone
+            </div>
+            <div id="value" className={css.fieldvalue}>
+              {phone}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>Please add new contacts</div>
+      )}
     </div>
   );
 }

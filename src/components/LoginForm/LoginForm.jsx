@@ -2,6 +2,8 @@ import { useContext, useRef } from "react";
 import AuthCtx from "../../context/AuthCtx";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
+import postDataToDb from "../../util/postDataToDb";
+import { POST_LOGIN } from "../../constants/constants";
 
 export default function LoginForm() {
   const { isLoggedInHandler } = useContext(AuthCtx);
@@ -30,39 +32,31 @@ export default function LoginForm() {
 
     const input = { username, password };
 
-    const postOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(input),
-    };
+    const dataReturnedFromDb = await postDataToDb(POST_LOGIN, input);
+    const { message, status, token } = dataReturnedFromDb;
 
-    const response = await fetch(
-      "http://localhost:5000/api/users/login",
-      postOptions
-    );
-    const data = await response.json();
+    //console.log(message, status, token);
 
     // reset from after submit
     formRef.current.reset();
 
-    // check if login response isn't valid send error modal
-    if (data.status !== 200) {
+    //    check if login response isn't valid send error modal
+    if (status !== 200) {
       showErrorModalHandler({
         show: true,
         type: "error",
-        message: data.message,
+        message: message,
       });
       return;
     }
 
-    localStorage.setItem("token", data.token);
+    localStorage.setItem("token", token);
     localStorage.setItem("isLoggedIn", true);
 
     showErrorModalHandler({
       show: true,
       type: "success",
-      message: data.message,
+      message: message,
     });
 
     // update context to isLoggedIn -> true

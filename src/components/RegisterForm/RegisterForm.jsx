@@ -1,6 +1,8 @@
 import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
+import postDataToDb from "../../util/postDataToDb";
+import { POST_REGISTER } from "../../constants/constants";
 
 export default function RegisterForm() {
   const { showErrorModalHandler } = useContext(DisplayCtx);
@@ -31,28 +33,18 @@ export default function RegisterForm() {
 
     const input = { username, password, email };
 
-    const postOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(input),
-    };
-
-    const response = await fetch(
-      "http://localhost:5000/api/users/register",
-      postOptions
-    );
-    const data = await response.json();
+    const dataReturnedFromDb = await postDataToDb(POST_REGISTER, input);
+    const { message, username: returnedUsername, status } = dataReturnedFromDb;
 
     // reset from after submit
     formRef.current.reset();
 
     // check if register response is valid
-    if (data.status !== 200) {
+    if (status !== 200) {
       showErrorModalHandler({
         show: true,
         type: "error",
-        message: data.message,
+        message: message,
       });
       return;
     }
@@ -61,7 +53,7 @@ export default function RegisterForm() {
     showErrorModalHandler({
       show: true,
       type: "success",
-      message: data.message,
+      message: message,
     });
 
     // navigate to login page
