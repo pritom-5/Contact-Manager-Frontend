@@ -11,18 +11,24 @@ export default function useDataFetchEffectHook(isLoggedIn, url, token = "") {
 
       const data = await fetchDataFromDb(url, token);
 
-      console.log(data);
       const sortedData = getSortedData(data);
-      //console.log(sortedData);
       setDataState(sortedData);
     };
     fetchFn();
-    //console.log("hook");
   }, [isLoggedIn]);
 
-  const setDataStateFn = () => {
+  const setDataStateFn = (contactInfo) => {
+    const { id, name, phone, email } = contactInfo;
     // set data state from here
-    return;
+    setDataState((prev) => [...prev, { ...contactInfo }]);
   };
-  return { fetchedData: dataState, setDataStateFn };
+
+  const removeContactsListFromStateFn = () => {
+    setDataState([]);
+  };
+  return {
+    fetchedData: dataState,
+    setDataStateFn,
+    removeContactsListFromStateFn,
+  };
 }

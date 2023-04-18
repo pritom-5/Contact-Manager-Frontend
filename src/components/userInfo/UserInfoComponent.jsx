@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import AuthCtx from "../../context/AuthCtx";
 import css from "./UserInfoComponent.module.css";
+import ContactCtx from "../../context/ContactCtx";
 
 export default function UserInfoComponent() {
   const { userInfo, isLoggedInHandler } = useContext(AuthCtx);
+  const { removeContactsListFromStateFn } = useContext(ContactCtx);
+
   const { email, username } = userInfo;
   const navigate = useNavigate();
 
@@ -16,6 +19,9 @@ export default function UserInfoComponent() {
 
     // change context of isLoggedIn to false
     isLoggedInHandler(false);
+
+    // clear current contacts list state
+    removeContactsListFromStateFn();
 
     // redirect to home directory
     navigate("/");

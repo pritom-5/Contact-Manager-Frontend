@@ -3,7 +3,7 @@ import AuthCtx from "../../context/AuthCtx";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
 import postDataToDb from "../../util/postDataToDb";
-import { POST_LOGIN } from "../../constants/constants";
+import { POST_LOGIN_URL } from "../../constants/constants";
 
 export default function LoginForm() {
   const { isLoggedInHandler } = useContext(AuthCtx);
@@ -32,10 +32,8 @@ export default function LoginForm() {
 
     const input = { username, password };
 
-    const dataReturnedFromDb = await postDataToDb(POST_LOGIN, input);
+    const dataReturnedFromDb = await postDataToDb(POST_LOGIN_URL, input);
     const { message, status, token } = dataReturnedFromDb;
-
-    //console.log(message, status, token);
 
     // reset from after submit
     formRef.current.reset();

@@ -10,7 +10,5 @@ export default async function fetchDataFromDb(url, token = "") {
   const response = await fetch(url, requestObj);
   const data = await response.json();
 
-  //console.log("function");
-
   return data;
 }

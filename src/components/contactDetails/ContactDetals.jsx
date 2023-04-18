@@ -14,9 +14,6 @@ export default function ContactDetails() {
     letter,
   } = activeContactDetailsState;
 
-  /////
-  console.log(contactName, id, phone, email);
-
   return (
     <div id="contact_details_section" className={`${css.details_section}`}>
       <div className="title_section form_title">Details</div>

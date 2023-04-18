@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
 import postDataToDb from "../../util/postDataToDb";
-import { POST_REGISTER } from "../../constants/constants";
+import { POST_REGISTER_URL } from "../../constants/constants";
 
 export default function RegisterForm() {
   const { showErrorModalHandler } = useContext(DisplayCtx);
@@ -33,7 +33,7 @@ export default function RegisterForm() {
 
     const input = { username, password, email };
 
-    const dataReturnedFromDb = await postDataToDb(POST_REGISTER, input);
+    const dataReturnedFromDb = await postDataToDb(POST_REGISTER_URL, input);
     const { message, username: returnedUsername, status } = dataReturnedFromDb;
 
     // reset from after submit

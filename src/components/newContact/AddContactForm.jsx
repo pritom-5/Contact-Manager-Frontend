@@ -3,8 +3,9 @@ import AuthCtx from "../../context/AuthCtx";
 import { useNavigate } from "react-router-dom";
 import DisplayCtx from "../../context/DisplayCtx";
 import postDataToDb from "../../util/postDataToDb";
-import { POST_NEW_CONTACT } from "../../constants/constants";
+import { POST_NEW_CONTACT_URL } from "../../constants/constants";
 import getTokenFromLocalStorage from "../../util/getTokenFromLocalStorage";
+import ContactCtx from "../../context/ContactCtx";
 
 // TODO: print some info bottom of the login form
 // proper error hander with message.
@@ -12,6 +13,7 @@ import getTokenFromLocalStorage from "../../util/getTokenFromLocalStorage";
 
 export default function AddContactForm() {
   const { showErrorModalHandler } = useContext(DisplayCtx);
+  const { addNewContactToContactsListHandler } = useContext(ContactCtx);
 
   const navigate = useNavigate();
 
@@ -42,14 +44,18 @@ export default function AddContactForm() {
     }
 
     const input = { name, phone, email };
+    // add data temporarily to all contacts state
+    addNewContactToContactsListHandler({
+      _id: Math.random().toFixed(3),
+      ...input,
+    });
 
     const dataReturnedFromDb = await postDataToDb(
-      POST_NEW_CONTACT,
+      POST_NEW_CONTACT_URL,
       input,
       token
     );
     const { message, status } = dataReturnedFromDb;
-    console.log(dataReturnedFromDb);
 
     // reset from after submit
     formRef.current.reset();

@@ -1,16 +1,22 @@
+// check if user is logged in.
+// get all the contacts list
+// set active contact on click or first contact on mount
+
 import { createContext, useContext, useState } from "react";
 import testContacts from "../dataTest/contactsTest.json";
 import useSelectActiveContact from "../hooks/useSelectActiveContact";
 import useDataFetchEffectHook from "../hooks/useDataFetchEffectHook";
-import { GET_ALL_CONTACTS } from "../constants/constants";
+import { GET_ALL_CONTACTS_URL } from "../constants/constants";
 import getTokenFromLocalStorage from "../util/getTokenFromLocalStorage";
 import AuthCtx from "./AuthCtx";
 
 const defaultContactContext = {
   contacts: [],
+  addNewContactToContactsListHandler: (contactInfo) => {},
   activeContact: "id",
   setActiveConactStateFn: (id) => {},
   activeContactDetailsState: { id: "", name: "", email: "", phone: "" },
+  removeContactsListFromStateFn: () => {},
 };
 
 const ContactCtx = createContext(defaultContactContext);
@@ -19,11 +25,11 @@ export function ContactCtxProvider({ children }) {
   const { isLoggedIn } = useContext(AuthCtx);
 
   const token = getTokenFromLocalStorage("token");
-  const { fetchedData: allContactsList } = useDataFetchEffectHook(
-    isLoggedIn,
-    GET_ALL_CONTACTS,
-    token
-  );
+  const {
+    fetchedData: allContactsList,
+    setDataStateFn,
+    removeContactsListFromStateFn,
+  } = useDataFetchEffectHook(isLoggedIn, GET_ALL_CONTACTS_URL, token);
 
   const {
     activeConactState,
@@ -35,9 +41,11 @@ export function ContactCtxProvider({ children }) {
     <ContactCtx.Provider
       value={{
         contacts: allContactsList,
+        addNewContactToContactsListHandler: setDataStateFn,
         activeContact: activeConactState,
         setActiveConactStateFn,
         activeContactDetailsState,
+        removeContactsListFromStateFn,
       }}
     >
       {children}
@@ -46,8 +54,3 @@ export function ContactCtxProvider({ children }) {
 }
 
 export default ContactCtx;
-
-// TODO:
-// fetch contacts on first render here.
-// then if user adds new contact just give a function to append it to the contacts list
-// give user option to edit the contact and delete the contact

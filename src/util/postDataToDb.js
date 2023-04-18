@@ -12,8 +12,6 @@ export default async function postDataToDb(url, inputPayload, token = "") {
     const response = await fetch(url, requestObj);
     const dataReturnedFromDb = await response.json();
 
-    // console.log(dataReturnedFromDb);
-
     return dataReturnedFromDb;
   } catch (error) {
     console.log(error);
