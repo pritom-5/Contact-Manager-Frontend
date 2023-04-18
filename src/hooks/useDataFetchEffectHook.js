@@ -1,3 +1,7 @@
+// on first mount or on change of isLoggedIn state fetch allContacts from db sort it
+// on adding new contact append new contact details to existing contacts state
+// on logout remove everything from the dataState. Remove all the contact list for current user
+
 import { useEffect, useState } from "react";
 import fetchDataFromDb from "../util/fetchDataFromDb";
 import getSortedData from "../util/getSortedData";

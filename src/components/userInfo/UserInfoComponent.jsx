@@ -1,15 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import AuthCtx from "../../context/AuthCtx";
 import css from "./UserInfoComponent.module.css";
 import ContactCtx from "../../context/ContactCtx";
+import fetchDataFromDb from "../../util/fetchDataFromDb";
+import { GET_USER_DETAILS_URL } from "../../constants/constants";
+import getTokenFromLocalStorage from "../../util/getTokenFromLocalStorage";
+import DisplayCtx from "../../context/DisplayCtx";
+import useUserDetailsFetch from "../../hooks/useUserDetailsFetch";
 
 export default function UserInfoComponent() {
   const { userInfo, isLoggedInHandler } = useContext(AuthCtx);
   const { removeContactsListFromStateFn } = useContext(ContactCtx);
 
-  const { email, username } = userInfo;
+  const token = getTokenFromLocalStorage("token");
+  const userDetailsState = useUserDetailsFetch(GET_USER_DETAILS_URL, token);
+  const { email, username } = userDetailsState;
+
   const navigate = useNavigate();
 
   // on logout button click
@@ -37,7 +45,7 @@ export default function UserInfoComponent() {
             Username
           </div>
           <div id="username_value" className={css.value}>
-            Username
+            {username}
           </div>
         </div>
         <div id="email_section">
@@ -45,7 +53,7 @@ export default function UserInfoComponent() {
             Email
           </div>
           <div id="email_value" className={css.value}>
-            email@email.com
+            {email}
           </div>
         </div>
         <Button buttonHandler={logoutHandler} buttonTxt={"Logout"} />

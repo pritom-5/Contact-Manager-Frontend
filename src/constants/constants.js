@@ -3,6 +3,7 @@ const GET_ALL_CONTACTS_URL = `${DOMAIN}/api/contacts`;
 const POST_NEW_CONTACT_URL = `${DOMAIN}/api/contacts`;
 const POST_REGISTER_URL = `${DOMAIN}/api/users/register`;
 const POST_LOGIN_URL = `${DOMAIN}/api/users/login`;
+const GET_USER_DETAILS_URL = `${DOMAIN}/api/users/details`;
 
 export {
   DOMAIN,
@@ -10,4 +11,5 @@ export {
   POST_REGISTER_URL,
   POST_LOGIN_URL,
   POST_NEW_CONTACT_URL,
+  GET_USER_DETAILS_URL,
 };
