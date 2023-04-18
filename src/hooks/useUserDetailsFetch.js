@@ -14,6 +14,7 @@ export default function useUserDetailsFetch(url, token) {
       }
 
       const data = await fetchDataFromDb(url, token);
+
       if (data.status !== 200) {
         throw new Error("Can't fetch details");
       }

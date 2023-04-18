@@ -4,19 +4,12 @@ import Button from "../UI/Button";
 import AuthCtx from "../../context/AuthCtx";
 import css from "./UserInfoComponent.module.css";
 import ContactCtx from "../../context/ContactCtx";
-import fetchDataFromDb from "../../util/fetchDataFromDb";
-import { GET_USER_DETAILS_URL } from "../../constants/constants";
-import getTokenFromLocalStorage from "../../util/getTokenFromLocalStorage";
-import DisplayCtx from "../../context/DisplayCtx";
-import useUserDetailsFetch from "../../hooks/useUserDetailsFetch";
 
 export default function UserInfoComponent() {
   const { userInfo, isLoggedInHandler } = useContext(AuthCtx);
-  const { removeContactsListFromStateFn } = useContext(ContactCtx);
+  const { removeContactsListFromStateFn, userDetails } = useContext(ContactCtx);
 
-  const token = getTokenFromLocalStorage("token");
-  const userDetailsState = useUserDetailsFetch(GET_USER_DETAILS_URL, token);
-  const { email, username } = userDetailsState;
+  const { email, username } = userDetails;
 
   const navigate = useNavigate();
 
