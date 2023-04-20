@@ -33,6 +33,9 @@ export default function useSelectActiveContact(contacts) {
       id: activeContact._id,
       rgb: usersRgbLogo,
     });
+
+    //// test
+    console.log("active contact updated");
   }, [contacts]);
 
   // use this funciton to select active contact from random component

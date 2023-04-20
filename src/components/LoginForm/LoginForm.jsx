@@ -32,7 +32,12 @@ export default function LoginForm() {
 
     const input = { username, password };
 
-    const dataReturnedFromDb = await postDataToDb(POST_LOGIN_URL, input);
+    const dataReturnedFromDb = await postDataToDb(
+      POST_LOGIN_URL,
+      input,
+      "",
+      "POST"
+    );
     const { message, status, token } = dataReturnedFromDb;
 
     // reset from after submit

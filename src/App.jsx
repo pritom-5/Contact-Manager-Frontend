@@ -13,6 +13,7 @@ import DisplayCtx from "./context/DisplayCtx";
 import AddContact from "./pages/AddContact";
 import Nav from "./components/nav/Nav";
 import ContactDetails from "./components/contactDetails/ContactDetals";
+import EditContact from "./pages/EditContact";
 
 function App() {
   const { isLoggedIn } = useContext(AuthCtx);
@@ -44,6 +45,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/addNewContact" element={<AddContact />} />
+          <Route path="/editContact" element={<EditContact />} />
         </Routes>
       </div>
     </div>

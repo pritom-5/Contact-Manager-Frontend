@@ -7,7 +7,11 @@ import ContactCtx from "../../context/ContactCtx";
 
 export default function UserInfoComponent() {
   const { userInfo, isLoggedInHandler } = useContext(AuthCtx);
-  const { removeContactsListFromStateFn, userDetails } = useContext(ContactCtx);
+  const {
+    removeContactsListFromStateFn,
+    userDetails,
+    clearUserDetailsStateFn,
+  } = useContext(ContactCtx);
 
   const { email, username } = userDetails;
 
@@ -23,6 +27,9 @@ export default function UserInfoComponent() {
 
     // clear current contacts list state
     removeContactsListFromStateFn();
+
+    // clear user info from state on logout
+    clearUserDetailsStateFn();
 
     // redirect to home directory
     navigate("/");

@@ -3,7 +3,7 @@ import fetchDataFromDb from "../util/fetchDataFromDb";
 import getTokenFromLocalStorage from "../util/getTokenFromLocalStorage";
 import DisplayCtx from "../context/DisplayCtx";
 
-export default function useUserDetailsFetch(url, token) {
+export default function useUserDetailsFetch(url, token, isLoggedIn) {
   const { showErrorModalHandler } = useContext(DisplayCtx);
   const [userDetailsState, setUserDetailsState] = useState({});
 
@@ -29,8 +29,14 @@ export default function useUserDetailsFetch(url, token) {
   };
 
   useEffect(() => {
-    getUserDetails();
-  }, []);
+    if (!isLoggedIn) return;
 
-  return userDetailsState;
+    getUserDetails();
+  }, [isLoggedIn]);
+
+  const clearUserDetailsStateFn = () => {
+    setUserDetailsState({});
+  };
+
+  return [userDetailsState, clearUserDetailsStateFn];
 }

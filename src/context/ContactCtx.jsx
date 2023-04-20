@@ -17,11 +17,13 @@ import useUserDetailsFetch from "../hooks/useUserDetailsFetch";
 const defaultContactContext = {
   contacts: [],
   addNewContactToContactsListHandler: (contactInfo) => {},
+  editContactFromContactsListHandler: () => {},
   activeContact: "id",
   setActiveConactStateFn: (id) => {},
   activeContactDetailsState: { id: "", name: "", email: "", phone: "" },
   removeContactsListFromStateFn: () => {},
   userDetails: "",
+  clearUserDetailsStateFn: () => {},
 };
 
 const ContactCtx = createContext(defaultContactContext);
@@ -35,6 +37,7 @@ export function ContactCtxProvider({ children }) {
     fetchedData: allContactsList,
     setDataStateFn,
     removeContactsListFromStateFn,
+    editDataStateFn,
   } = useDataFetchEffectHook(isLoggedIn, GET_ALL_CONTACTS_URL, token);
 
   const {
@@ -43,18 +46,24 @@ export function ContactCtxProvider({ children }) {
     activeContactDetailsState,
   } = useSelectActiveContact(allContactsList);
 
-  const userDetailsState = useUserDetailsFetch(GET_USER_DETAILS_URL, token);
+  const [userDetailsState, clearUserDetailsStateFn] = useUserDetailsFetch(
+    GET_USER_DETAILS_URL,
+    token,
+    isLoggedIn
+  );
 
   return (
     <ContactCtx.Provider
       value={{
         contacts: allContactsList,
         addNewContactToContactsListHandler: setDataStateFn,
+        editContactFromContactsListHandler: editDataStateFn,
         activeContact: activeConactState,
         setActiveConactStateFn,
         activeContactDetailsState,
         removeContactsListFromStateFn,
         userDetails: userDetailsState,
+        clearUserDetailsStateFn,
       }}
     >
       {children}

@@ -13,9 +13,9 @@ function getRandomColorCode(letterNo, randomDefaultValue) {
 }
 
 function getRgbColorForLetter(letterNo) {
-  const red = getRandomColorCode(letterNo, 200);
-  const green = getRandomColorCode(letterNo, 300);
-  const blue = getRandomColorCode(letterNo, 400);
+  const red = getRandomColorCode(letterNo, 50);
+  const green = getRandomColorCode(letterNo, 100);
+  const blue = getRandomColorCode(letterNo, 150);
 
   return `rgb( ${red} , ${green}, ${blue})`;
 }

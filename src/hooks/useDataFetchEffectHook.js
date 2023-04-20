@@ -27,6 +27,22 @@ export default function useDataFetchEffectHook(isLoggedIn, url, token = "") {
     setDataState((prev) => [...prev, { ...contactInfo }]);
   };
 
+  const editDataStateFn = (contactInfo) => {
+    const { _id, name, phone, email } = contactInfo;
+
+    // deep copy data state
+    const dataStateCopy = JSON.parse(JSON.stringify(dataState));
+
+    const existingContact = dataStateCopy.find((item) => item._id === _id);
+
+    // update the contact
+    existingContact.name = name;
+    existingContact.phone = phone;
+    existingContact.email = email;
+
+    setDataState(dataStateCopy);
+  };
+
   const removeContactsListFromStateFn = () => {
     setDataState([]);
   };
@@ -34,5 +50,6 @@ export default function useDataFetchEffectHook(isLoggedIn, url, token = "") {
     fetchedData: dataState,
     setDataStateFn,
     removeContactsListFromStateFn,
+    editDataStateFn,
   };
 }

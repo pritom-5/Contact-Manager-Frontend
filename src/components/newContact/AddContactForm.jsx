@@ -1,89 +1,38 @@
-import { useContext, useRef } from "react";
-import AuthCtx from "../../context/AuthCtx";
-import { useNavigate } from "react-router-dom";
-import DisplayCtx from "../../context/DisplayCtx";
-import postDataToDb from "../../util/postDataToDb";
-import { POST_NEW_CONTACT_URL } from "../../constants/constants";
-import getTokenFromLocalStorage from "../../util/getTokenFromLocalStorage";
-import ContactCtx from "../../context/ContactCtx";
+import useAddorEditContactFormHook from "../../hooks/useAddorEditContactFormHook";
 
-// TODO: print some info bottom of the login form
-// proper error hander with message.
-//
+const defaultInputsObj = {
+  name: "",
+  email: "",
+  phone: "",
+};
 
-export default function AddContactForm() {
-  const { showErrorModalHandler } = useContext(DisplayCtx);
-  const { addNewContactToContactsListHandler } = useContext(ContactCtx);
+export default function AddContactForm({
+  tokenKey,
+  url,
+  type,
+  fnToRunAfterSubmit,
+  defaultInputs = defaultInputsObj,
+  Header = "Add New Contact",
+  submitText = "Add Contact",
+}) {
+  const { refsObj, submitHandler } = useAddorEditContactFormHook(
+    tokenKey,
+    url,
+    type,
+    fnToRunAfterSubmit
+  );
 
-  const navigate = useNavigate();
+  const { formRef, mailRef, nameRef, phoneRef } = refsObj;
 
-  const nameRef = useRef();
-  const phoneRef = useRef();
-  const mailRef = useRef();
-  const formRef = useRef();
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
-    // get token from local storage
-    const token = getTokenFromLocalStorage("token");
-
-    // get values from from ref
-    const name = nameRef.current.value;
-    const phone = phoneRef.current.value;
-    const email = mailRef.current.value;
-
-    // if user doesn't enter valid values
-    if (!name || !phone || !email) {
-      showErrorModalHandler({
-        show: true,
-        type: "error",
-        message: "User info not correct",
-      });
-      return;
-    }
-
-    const input = { name, phone, email };
-    // add data temporarily to all contacts state
-    addNewContactToContactsListHandler({
-      _id: Math.random().toFixed(3),
-      ...input,
-    });
-
-    const dataReturnedFromDb = await postDataToDb(
-      POST_NEW_CONTACT_URL,
-      input,
-      token
-    );
-    const { message, status } = dataReturnedFromDb;
-
-    // reset from after submit
-    formRef.current.reset();
-
-    // check if contact response is valid
-    if (status !== 200) {
-      showErrorModalHandler({
-        show: true,
-        type: "error",
-        message: message,
-      });
-      return;
-    }
-
-    // show success modal
-    showErrorModalHandler({
-      show: true,
-      type: "success",
-      message: message,
-    });
-
-    // navigate to contacts page
-    navigate("/contacts");
-  };
+  const {
+    name: defaultName,
+    email: defaultEmail,
+    phone: defaultPhone,
+  } = defaultInputs;
 
   return (
     <div className="form_container">
-      <div className="form_title">Add New Contact</div>
+      <div className="form_title">{Header}</div>
       <form onSubmit={submitHandler} ref={formRef} className="form_section">
         <div className="name input_section">
           <label className="input_label" htmlFor="name">
@@ -98,6 +47,7 @@ export default function AddContactForm() {
             max={15}
             required
             ref={nameRef}
+            defaultValue={defaultName}
           />
         </div>
         <div className="phone input_section">
@@ -113,6 +63,7 @@ export default function AddContactForm() {
             max={15}
             required
             ref={phoneRef}
+            defaultValue={defaultPhone}
           />
         </div>
         <div className="mail input_section">
@@ -128,13 +79,10 @@ export default function AddContactForm() {
             max={15}
             required
             ref={mailRef}
+            defaultValue={defaultEmail}
           />
         </div>
-        <input
-          type="submit"
-          value="Add New Contact"
-          className="submit_button"
-        />
+        <input type="submit" value={submitText} className="submit_button" />
       </form>
     </div>
   );

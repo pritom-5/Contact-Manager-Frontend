@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import ContactCtx from "../../context/ContactCtx";
 import css from "./ContactDetails.module.css";
+import { Link } from "react-router-dom";
 
 export default function ContactDetails() {
   // get values from context
@@ -17,6 +18,7 @@ export default function ContactDetails() {
   return (
     <div id="contact_details_section" className={`${css.details_section}`}>
       <div className="title_section form_title">Details</div>
+      <Link to={"/editContact"}>Edit</Link>
       <div
         id="header_section"
         className={css.header}

@@ -1,6 +1,11 @@
-export default async function postDataToDb(url, inputPayload, token = "") {
+export default async function postDataToDb(
+  url,
+  inputPayload,
+  token = "",
+  method
+) {
   const requestObj = {
-    method: "POST",
+    method,
     headers: { "Content-Type": "application/json" },
     credentials: "include",
     body: JSON.stringify(inputPayload),
@@ -11,6 +16,10 @@ export default async function postDataToDb(url, inputPayload, token = "") {
   try {
     const response = await fetch(url, requestObj);
     const dataReturnedFromDb = await response.json();
+
+    if (!dataReturnedFromDb) {
+      throw new Error("Can't post data");
+    }
 
     return dataReturnedFromDb;
   } catch (error) {
