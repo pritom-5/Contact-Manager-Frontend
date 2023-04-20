@@ -27,3 +27,7 @@
   flex-direction: column;
   gap: 1rem;
 }
+.demo_info {
+  margin-inline: auto;
+  font-size: 20px;
+}

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthCtx from "../../context/AuthCtx";
 import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
@@ -6,6 +6,7 @@ import css from "./HomeComponent.module.css";
 
 export default function HomeComponent() {
   const { isLoggedIn } = useContext(AuthCtx);
+  const [showDemoPassword, setShowDemoPassword] = useState(false);
   const navigate = useNavigate();
   return (
     <div className={css.home_component_section}>
@@ -38,6 +39,12 @@ export default function HomeComponent() {
             buttonTxt={"Register"}
           />
         )}
+        {!isLoggedIn && (
+          <Button
+            buttonHandler={() => setShowDemoPassword((prev) => !prev)}
+            buttonTxt={"Demo"}
+          />
+        )}
         {/* else show this => register login buttons */}
         {isLoggedIn && (
           <div className="contacts_button">
@@ -48,6 +55,11 @@ export default function HomeComponent() {
           </div>
         )}
       </div>
+      {showDemoPassword && (
+        <pre className={css.demo_info}>
+          {JSON.stringify({ username: "admin", password: "admin" })}
+        </pre>
+      )}
     </div>
   );
 }

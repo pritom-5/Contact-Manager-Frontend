@@ -33,7 +33,12 @@ export default function RegisterForm() {
 
     const input = { username, password, email };
 
-    const dataReturnedFromDb = await postDataToDb(POST_REGISTER_URL, input);
+    const dataReturnedFromDb = await postDataToDb(
+      POST_REGISTER_URL,
+      input,
+      "",
+      "POST"
+    );
     const { message, username: returnedUsername, status } = dataReturnedFromDb;
 
     // reset from after submit
