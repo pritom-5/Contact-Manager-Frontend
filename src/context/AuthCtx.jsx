@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { GET_USER_DETAILS_URL } from "../constants/constants";
 
 const initialContext = {
   isLoggedIn: false,
@@ -37,10 +38,7 @@ export function AuthCtxProvider(props) {
         },
         credentials: "include",
       };
-      const response = await fetch(
-        "http://localhost:5000/api/users/details",
-        requestObj
-      );
+      const response = await fetch(GET_USER_DETAILS_URL, requestObj);
       const data = await response.json();
 
       // if data undefined of message is unauthorized
