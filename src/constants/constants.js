@@ -1,5 +1,5 @@
 // const DOMAIN = "http://localhost:5000";
-const DOMAIN = `https://contact-manager-j80n.onrender.com`;
+const DOMAIN = `https://contact-manager-fullstack.onrender.com`;
 const GET_ALL_CONTACTS_URL = `${DOMAIN}/api/contacts`;
 const POST_NEW_CONTACT_URL = `${DOMAIN}/api/contacts`;
 const PUT_EDIT_CONTACT_URL_fn = (id) => {
