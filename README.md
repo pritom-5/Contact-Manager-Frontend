@@ -10,7 +10,7 @@ This is a fullstack application to track your contacts
 
 | Desc                    | LINK                                                                                                       |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Backend API Live link   | [contacts-manager-api](https://contact-manager-fullstack.onrender.com)                                     |
+| Backend API Live link   | [contacts-manager-api](https://contact-manager-fullstack.onrender.com/api/hello)                                     |
 | Full stack website demo | [contacts-manager-full-stack-app](https://contact-manager-frontend-g6mn68y2x-pritom-5.vercel.app) |
 
 <br/>
