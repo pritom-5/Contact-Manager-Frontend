@@ -53,9 +53,6 @@ export default function useAddorEditContactFormHook(
 
       const dataReturnedFromDb = await postDataToDb(url, input, token, method);
 
-      //////////test
-      console.log(dataReturnedFromDb);
-
       if (!dataReturnedFromDb) {
         throw new Error("Cannection Error");
       }
